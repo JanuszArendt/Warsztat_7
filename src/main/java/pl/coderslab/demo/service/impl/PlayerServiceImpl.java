@@ -18,10 +18,8 @@ public class PlayerServiceImpl implements PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
-///Binaries/Win32/pb/svlogs/0000023.log
     @Override
     public Player readAndSave() {
-        // odczyt pliku z servera ftp
         File file = new File("00000023.log");
         try {
             FTPClient ftpClient = FtpClient.open("11.22.33.444",21,"User","Password");
@@ -30,7 +28,7 @@ public class PlayerServiceImpl implements PlayerService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // koniec odczytu ftp
+
 
         Set<Player> players = new HashSet<>();
         Player player = new Player();
@@ -82,11 +80,9 @@ public class PlayerServiceImpl implements PlayerService {
                             }
                             if(playerRepository.findTopByGuidAndNameAndIp(c,a,b)==null) {
                                 Player player1 = new Player();
-
                                 player1.setName(a);
                                 player1.setIp(b);
                                 player1.setGuid(c);
-
                                 playerRepository.save(player1);
                             }
                             FileWriter out = new FileWriter("zebrane.txt", true);
@@ -102,6 +98,64 @@ public class PlayerServiceImpl implements PlayerService {
 
         }catch(FileNotFoundException e){
             System.out.println("brak pliku do odczytu !!");
+        }
+        return null;
+    }
+
+    @Override
+    public List<Player> findPlayersByName(String name) {
+        List<Player> players = playerRepository.findByFirstnameInclude(name);
+        return players;
+    }
+
+    @Override
+    public Player banPlayer(long id) {
+        Player player = playerRepository.findById(id);
+        if (!player.isBanned()){
+            player.setBanned(true);
+            playerRepository.save(player);
+        }else {
+            System.out.println("player jest już na liście banów");
+        }
+        return null;
+    }
+
+    @Override
+    public List<Player> playerBanList() {
+        List<Player> banedPlayers = playerRepository.findAllByBannedIsTrue();
+        return banedPlayers;
+    }
+
+    @Override
+    public Player delBanPlayer(long id) {
+        Player player = playerRepository.findById(id);
+        player.setBanned(false);
+        playerRepository.save(player);
+        return null;
+    }
+
+    @Override
+    public Player saveBanList() {
+        List<Player> banlist =  playerRepository.findAllByBannedIsTrue();
+        try {
+            FileWriter file = new FileWriter("banlistTest.txt", false);
+            for (Player s: banlist) {
+                file.append(s.getGuid()+"\n");
+            }
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("błąd zapisu pliku");
+        }
+        try {
+            File file = new File("banlistTest.txt");
+            FTPClient ftpClient = FtpClient.open("11.22.33.444",21,"User","Password");
+            InputStream input = new FileInputStream(file);
+            ftpClient.storeFile("/Binaries/Win32/pb/banlistTest.txt",input);
+            FtpClient.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("brak możliwości połączenia ftp");
         }
         return null;
     }

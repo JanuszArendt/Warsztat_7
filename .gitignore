@@ -16,6 +16,17 @@
 *.iml
 *.ipr
 
+
+### Added
+*.txt
+*.ini
+*.log
+.DS_Store
+mvnw
+mvnw.cmd
+src/main/java/pl/coderslab/demo/controler/UserControler.java
+
+
 ### NetBeans ###
 /nbproject/private/
 /build/

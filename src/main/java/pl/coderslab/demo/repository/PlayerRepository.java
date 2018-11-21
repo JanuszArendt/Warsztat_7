@@ -10,17 +10,9 @@ import java.util.List;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player,Long> {
 
-
     @Query("select u from Player u where u.name like %?1%")
     List<Player> findByFirstnameInclude(String name);
-
     Player findById (long id);
     Player findTopByGuidAndNameAndIp(String guid,String name, String ip);
-
-
     List<Player> findAllByBannedIsTrue();
-
-
-
-
 }

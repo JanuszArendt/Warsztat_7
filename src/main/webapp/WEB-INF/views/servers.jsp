@@ -38,7 +38,7 @@
 
             <tr>
                 <td> ${server.name}</td>
-                <td> <a href="../upload"> upload </a>     </td>
+                <td> <a href="/user/upload"> upload </a>     </td>
                 <security:authorize access="hasRole('ADMIN')">
                 <td> <a href="../user/del/${server.id}">del</a>
                     </security:authorize><br></td>

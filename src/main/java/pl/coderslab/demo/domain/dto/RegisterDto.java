@@ -1,6 +1,5 @@
 package pl.coderslab.demo.domain.dto;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class RegisterDto { //obiekt DTO czyli Data Transfer Object, wykorzystywany do mapowania formularzy html na obiekt javy

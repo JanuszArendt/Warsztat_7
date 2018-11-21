@@ -14,10 +14,8 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Setings {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Setings extends BaseEntity{
+
     private String descriotion;
     private boolean slected;
 

@@ -14,10 +14,8 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 public class Server extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+
     private String name;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    private Set<Player> players;
+    private Set<User> users;
 }

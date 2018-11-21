@@ -12,9 +12,10 @@ import pl.coderslab.demo.security.CurrentUser;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SpringDataUserDetailsService implements UserDetailsService { //implementacja serwisu UserDetailsService ktory wywolywany jest
-                                                                          // przez spring security podczas autoryzacji
-                                                                          // podczas loadUserByUsername szukamy usera w naszym serwisie (DB)
+public class SpringDataUserDetailsService implements UserDetailsService {
+    //implementacja serwisu UserDetailsService ktory wywolywany jest
+    // przez spring security podczas autoryzacji
+    // podczas loadUserByUsername szukamy usera w naszym serwisie (DB)
 
 
     @Autowired

@@ -1,5 +1,4 @@
 package pl.coderslab.demo.service;
 
-public interface SearchService {
-
+public interface SetingsService {
 }

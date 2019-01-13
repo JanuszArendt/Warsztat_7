@@ -1,1 +1,1 @@
-# Warsztat 7
+# Samodzielny Projekt Końcowy
